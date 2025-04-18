@@ -1,0 +1,8 @@
+/vitebuild/
+/config/
+/build/
+/*.js
+/test/unit/coverage/
+/node_modules/*
+/build*
+/src/main.ts

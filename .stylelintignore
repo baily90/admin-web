@@ -1,0 +1,6 @@
+/build/*
+/public/*
+public/*
+/build*
+/src/types/env.d.ts
+/docs/**/*
