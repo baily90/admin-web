@@ -138,14 +138,14 @@ export type UserTaskFormType = {
   candidateStrategy: CandidateStrategy
   approveMethod: ApproveMethodType
   roleIds?: number[] // 角色
-  deptIds?: number[] // 部门
-  deptLevel?: number // 部门层级
+  deptIds?: number[] // 医院
+  deptLevel?: number // 医院层级
   userIds?: number[] // 用户
   userGroups?: number[] // 用户组
   postIds?: number[] // 岗位
   expression?: string // 流程表达式
   formUser?: string // 表单内用户字段
-  formDept?: string // 表单内部门字段
+  formDept?: string // 表单内医院字段
   approveRatio?: number
   rejectHandlerType?: RejectHandlerType
   returnNodeId?: string
@@ -182,13 +182,13 @@ export type UserTaskFormType = {
 export type CopyTaskFormType = {
   candidateStrategy: CandidateStrategy
   roleIds?: number[] // 角色
-  deptIds?: number[] // 部门
-  deptLevel?: number // 部门层级
+  deptIds?: number[] // 医院
+  deptLevel?: number // 医院层级
   userIds?: number[] // 用户
   userGroups?: number[] // 用户组
   postIds?: number[] // 岗位
   formUser?: string // 表单内用户字段
-  formDept?: string // 表单内部门字段
+  formDept?: string // 表单内医院字段
   expression?: string // 流程表达式
 }
 
@@ -199,9 +199,9 @@ export function useNodeForm(nodeType: NodeType) {
   const roleOptions = inject<Ref<RoleApi.RoleVO[]>>('roleList', ref([])) // 角色列表
   const postOptions = inject<Ref<PostApi.PostVO[]>>('postList', ref([])) // 岗位列表
   const userOptions = inject<Ref<UserApi.UserVO[]>>('userList', ref([])) // 用户列表
-  const deptOptions = inject<Ref<DeptApi.DeptVO[]>>('deptList', ref([])) // 部门列表
+  const deptOptions = inject<Ref<DeptApi.DeptVO[]>>('deptList', ref([])) // 医院列表
   const userGroupOptions = inject<Ref<UserGroupApi.UserGroupVO[]>>('userGroupList', ref([])) // 用户组列表
-  const deptTreeOptions = inject('deptTree', ref()) // 部门树
+  const deptTreeOptions = inject('deptTree', ref()) // 医院树
   const formFields = inject<Ref<string[]>>('formFields', ref([])) // 流程表单字段
   const configForm = ref<UserTaskFormType | CopyTaskFormType>()
   if (nodeType === NodeType.USER_TASK_NODE || nodeType === NodeType.TRANSACTOR_NODE) {
@@ -250,7 +250,7 @@ export function useNodeForm(nodeType: NodeType) {
         showText = `指定角色：${candidateNames.join(',')}`
       }
     }
-    // 指定部门
+    // 指定医院
     if (
       configForm.value?.candidateStrategy === CandidateStrategy.DEPT_MEMBER ||
       configForm.value?.candidateStrategy === CandidateStrategy.DEPT_LEADER ||
@@ -264,11 +264,11 @@ export function useNodeForm(nodeType: NodeType) {
           }
         })
         if (configForm.value.candidateStrategy === CandidateStrategy.DEPT_MEMBER) {
-          showText = `部门成员：${candidateNames.join(',')}`
+          showText = `医院成员：${candidateNames.join(',')}`
         } else if (configForm.value.candidateStrategy === CandidateStrategy.DEPT_LEADER) {
-          showText = `部门的负责人：${candidateNames.join(',')}`
+          showText = `医院的负责人：${candidateNames.join(',')}`
         } else {
-          showText = `多级部门的负责人：${candidateNames.join(',')}`
+          showText = `多级医院的负责人：${candidateNames.join(',')}`
         }
       }
     }
@@ -305,9 +305,9 @@ export function useNodeForm(nodeType: NodeType) {
       showText = `表单用户：${item?.title}`
     }
 
-    // 表单内部门负责人
+    // 表单内医院负责人
     if (configForm.value?.candidateStrategy === CandidateStrategy.FORM_DEPT_LEADER) {
-      showText = `表单内部门负责人`
+      showText = `表单内医院负责人`
     }
 
     // 审批人自选
@@ -323,15 +323,15 @@ export function useNodeForm(nodeType: NodeType) {
     if (configForm.value?.candidateStrategy === CandidateStrategy.START_USER) {
       showText = `发起人自己`
     }
-    // 发起人的部门负责人
+    // 发起人的医院负责人
     if (configForm.value?.candidateStrategy === CandidateStrategy.START_USER_DEPT_LEADER) {
-      showText = `发起人的部门负责人`
+      showText = `发起人的医院负责人`
     }
-    // 发起人的部门负责人
+    // 发起人的医院负责人
     if (
       configForm.value?.candidateStrategy === CandidateStrategy.START_USER_MULTI_LEVEL_DEPT_LEADER
     ) {
-      showText = `发起人连续部门负责人`
+      showText = `发起人连续医院负责人`
     }
     // 流程表达式
     if (configForm.value?.candidateStrategy === CandidateStrategy.EXPRESSION) {
@@ -371,21 +371,21 @@ export function useNodeForm(nodeType: NodeType) {
       case CandidateStrategy.DEPT_LEADER:
         candidateParam = configForm.value.deptIds!.join(',')
         break
-      // 发起人部门负责人
+      // 发起人医院负责人
       case CandidateStrategy.START_USER_DEPT_LEADER:
       case CandidateStrategy.START_USER_MULTI_LEVEL_DEPT_LEADER:
         candidateParam = configForm.value.deptLevel + ''
         break
-      // 指定连续多级部门的负责人
+      // 指定连续多级医院的负责人
       case CandidateStrategy.MULTI_LEVEL_DEPT_LEADER: {
-        // 候选人参数格式: | 分隔 。左边为部门（多个部门用 , 分隔）。 右边为部门层级
+        // 候选人参数格式: | 分隔 。左边为医院（多个医院用 , 分隔）。 右边为医院层级
         const deptIds = configForm.value.deptIds!.join(',')
         candidateParam = deptIds.concat('|' + configForm.value.deptLevel + '')
         break
       }
-      // 表单内部门的负责人
+      // 表单内医院的负责人
       case CandidateStrategy.FORM_DEPT_LEADER: {
-        // 候选人参数格式: | 分隔 。左边为表单内部门字段。 右边为部门层级
+        // 候选人参数格式: | 分隔 。左边为表单内医院字段。 右边为医院层级
         const deptFieldOnForm = configForm.value.formDept!
         candidateParam = deptFieldOnForm.concat('|' + configForm.value.deptLevel + '')
         break
@@ -429,22 +429,22 @@ export function useNodeForm(nodeType: NodeType) {
       case CandidateStrategy.DEPT_LEADER:
         configForm.value.deptIds = candidateParam.split(',').map((item) => +item)
         break
-      // 发起人部门负责人
+      // 发起人医院负责人
       case CandidateStrategy.START_USER_DEPT_LEADER:
       case CandidateStrategy.START_USER_MULTI_LEVEL_DEPT_LEADER:
         configForm.value.deptLevel = +candidateParam
         break
-      // 指定连续多级部门的负责人
+      // 指定连续多级医院的负责人
       case CandidateStrategy.MULTI_LEVEL_DEPT_LEADER: {
-        // 候选人参数格式: | 分隔 。左边为部门（多个部门用 , 分隔）。 右边为部门层级
+        // 候选人参数格式: | 分隔 。左边为医院（多个医院用 , 分隔）。 右边为医院层级
         const paramArray = candidateParam.split('|')
         configForm.value.deptIds = paramArray[0].split(',').map((item) => +item)
         configForm.value.deptLevel = +paramArray[1]
         break
       }
-      // 表单内的部门负责人
+      // 表单内的医院负责人
       case CandidateStrategy.FORM_DEPT_LEADER: {
-        // 候选人参数格式: | 分隔 。左边为表单内的部门字段。 右边为部门层级
+        // 候选人参数格式: | 分隔 。左边为表单内的医院字段。 右边为医院层级
         const paramArray = candidateParam.split('|')
         configForm.value.formDept = paramArray[0]
         configForm.value.deptLevel = +paramArray[1]

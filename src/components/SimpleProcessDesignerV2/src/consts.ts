@@ -143,15 +143,15 @@ export enum CandidateStrategy {
    */
   ROLE = 10,
   /**
-   * 部门成员
+   * 医院成员
    */
   DEPT_MEMBER = 20,
   /**
-   * 部门的负责人
+   * 医院的负责人
    */
   DEPT_LEADER = 21,
   /**
-   * 连续多级部门的负责人
+   * 连续多级医院的负责人
    */
   MULTI_LEVEL_DEPT_LEADER = 23,
   /**
@@ -175,11 +175,11 @@ export enum CandidateStrategy {
    */
   START_USER = 36,
   /**
-   * 发起人部门负责人
+   * 发起人医院负责人
    */
   START_USER_DEPT_LEADER = 37,
   /**
-   * 发起人连续多级部门的负责人
+   * 发起人连续多级医院的负责人
    */
   START_USER_MULTI_LEVEL_DEPT_LEADER = 38,
   /**
@@ -191,7 +191,7 @@ export enum CandidateStrategy {
    */
   FORM_USER = 50,
   /**
-   * 表单内部门负责人
+   * 表单内医院负责人
    */
   FORM_DEPT_LEADER = 51,
   /**
@@ -347,7 +347,7 @@ export enum AssignStartUserHandlerType {
    */
   SKIP = 2,
   /**
-   * 转交给部门负责人审批
+   * 转交给医院负责人审批
    */
   ASSIGN_DEPT_LEADER = 3
 }
@@ -541,17 +541,17 @@ export const CANDIDATE_STRATEGY: DictDataVO[] = [
   { label: '指定成员', value: CandidateStrategy.USER },
   { label: '指定角色', value: CandidateStrategy.ROLE },
   { label: '指定岗位', value: CandidateStrategy.POST },
-  { label: '部门成员', value: CandidateStrategy.DEPT_MEMBER },
-  { label: '部门负责人', value: CandidateStrategy.DEPT_LEADER },
-  { label: '连续多级部门负责人', value: CandidateStrategy.MULTI_LEVEL_DEPT_LEADER },
+  { label: '医院成员', value: CandidateStrategy.DEPT_MEMBER },
+  { label: '医院负责人', value: CandidateStrategy.DEPT_LEADER },
+  { label: '连续多级医院负责人', value: CandidateStrategy.MULTI_LEVEL_DEPT_LEADER },
   { label: '发起人自选', value: CandidateStrategy.START_USER_SELECT },
   { label: '审批人自选', value: CandidateStrategy.APPROVE_USER_SELECT },
   { label: '发起人本人', value: CandidateStrategy.START_USER },
-  { label: '发起人部门负责人', value: CandidateStrategy.START_USER_DEPT_LEADER },
-  { label: '发起人连续部门负责人', value: CandidateStrategy.START_USER_MULTI_LEVEL_DEPT_LEADER },
+  { label: '发起人医院负责人', value: CandidateStrategy.START_USER_DEPT_LEADER },
+  { label: '发起人连续医院负责人', value: CandidateStrategy.START_USER_MULTI_LEVEL_DEPT_LEADER },
   { label: '用户组', value: CandidateStrategy.USER_GROUP },
   { label: '表单内用户字段', value: CandidateStrategy.FORM_USER },
-  { label: '表单内部门负责人', value: CandidateStrategy.FORM_DEPT_LEADER },
+  { label: '表单内医院负责人', value: CandidateStrategy.FORM_DEPT_LEADER },
   { label: '流程表达式', value: CandidateStrategy.EXPRESSION }
 ]
 // 审批节点 的审批类型
@@ -599,7 +599,7 @@ export const ASSIGN_EMPTY_HANDLER_TYPES: DictDataVO[] = [
 export const ASSIGN_START_USER_HANDLER_TYPES: DictDataVO[] = [
   { label: '由发起人对自己审批', value: 1 },
   { label: '自动跳过', value: 2 },
-  { label: '转交给部门负责人审批', value: 3 }
+  { label: '转交给医院负责人审批', value: 3 }
 ]
 
 // 比较运算符
@@ -670,21 +670,21 @@ export const START_USER_BUTTON_SETTING: ButtonSetting[] = [
 ]
 
 export const MULTI_LEVEL_DEPT: DictDataVO = [
-  { label: '第 1 级部门', value: 1 },
-  { label: '第 2 级部门', value: 2 },
-  { label: '第 3 级部门', value: 3 },
-  { label: '第 4 级部门', value: 4 },
-  { label: '第 5 级部门', value: 5 },
-  { label: '第 6 级部门', value: 6 },
-  { label: '第 7 级部门', value: 7 },
-  { label: '第 8 级部门', value: 8 },
-  { label: '第 9 级部门', value: 9 },
-  { label: '第 10 级部门', value: 10 },
-  { label: '第 11 级部门', value: 11 },
-  { label: '第 12 级部门', value: 12 },
-  { label: '第 13 级部门', value: 13 },
-  { label: '第 14 级部门', value: 14 },
-  { label: '第 15 级部门', value: 15 }
+  { label: '第 1 级医院', value: 1 },
+  { label: '第 2 级医院', value: 2 },
+  { label: '第 3 级医院', value: 3 },
+  { label: '第 4 级医院', value: 4 },
+  { label: '第 5 级医院', value: 5 },
+  { label: '第 6 级医院', value: 6 },
+  { label: '第 7 级医院', value: 7 },
+  { label: '第 8 级医院', value: 8 },
+  { label: '第 9 级医院', value: 9 },
+  { label: '第 10 级医院', value: 10 },
+  { label: '第 11 级医院', value: 11 },
+  { label: '第 12 级医院', value: 12 },
+  { label: '第 13 级医院', value: 13 },
+  { label: '第 14 级医院', value: 14 },
+  { label: '第 15 级医院', value: 15 }
 ]
 
 /**

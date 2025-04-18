@@ -4,7 +4,7 @@
   <doc-alert title="Excel 导入导出" url="https://doc.iocoder.cn/excel-import-and-export/" />
 
   <el-row :gutter="20">
-    <!-- 左侧部门树 -->
+    <!-- 左侧医院树 -->
     <el-col :span="4" :xs="24">
       <ContentWrap class="h-1/1">
         <DeptTree @node-click="handleDeptNodeClick" />
@@ -110,7 +110,7 @@
             :show-overflow-tooltip="true"
           />
           <el-table-column
-            label="部门"
+            label="医院"
             align="center"
             key="deptName"
             prop="deptName"
@@ -254,7 +254,7 @@ const resetQuery = () => {
   handleQuery()
 }
 
-/** 处理部门被点击 */
+/** 处理医院被点击 */
 const handleDeptNodeClick = async (row) => {
   queryParams.deptId = row.id
   await getList()

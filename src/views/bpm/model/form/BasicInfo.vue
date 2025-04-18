@@ -77,7 +77,7 @@
       >
         <el-option label="全员" :value="0" />
         <el-option label="指定人员" :value="1" />
-        <el-option label="指定部门" :value="2" />
+        <el-option label="指定医院" :value="2" />
       </el-select>
       <div v-if="modelData.startUserType === 1" class="mt-2 flex flex-wrap gap-2">
         <div
@@ -115,7 +115,7 @@
           />
         </div>
         <el-button type="primary" link @click="openStartDeptSelect">
-          <Icon icon="ep:plus" /> 选择部门
+          <Icon icon="ep:plus" /> 选择医院
         </el-button>
       </div>
     </el-form-item>
@@ -146,7 +146,7 @@
 
   <!-- 用户选择弹窗 -->
   <UserSelectForm ref="userSelectFormRef" @confirm="handleUserSelectConfirm" />
-  <!-- 部门选择弹窗 -->
+  <!-- 医院选择弹窗 -->
   <DeptSelectForm
     ref="deptSelectFormRef"
     :multiple="true"
@@ -233,7 +233,7 @@ const openStartUserSelect = () => {
   userSelectFormRef.value.open(0, selectedStartUsers.value)
 }
 
-/** 打开部门选择 */
+/** 打开医院选择 */
 const openStartDeptSelect = () => {
   deptSelectFormRef.value.open(selectedStartDepts.value)
 }
@@ -259,7 +259,7 @@ const handleUserSelectConfirm = (_, users: UserVO[]) => {
   }
 }
 
-/** 处理部门选择确认 */
+/** 处理医院选择确认 */
 const handleDeptSelectConfirm = (depts: DeptVO[]) => {
   modelData.value = {
     ...modelData.value,
@@ -296,7 +296,7 @@ const handleRemoveStartUser = (user: UserVO) => {
   }
 }
 
-/** 移除部门 */
+/** 移除医院 */
 const handleRemoveStartDept = (dept: DeptVO) => {
   modelData.value = {
     ...modelData.value,

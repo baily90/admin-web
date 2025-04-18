@@ -82,7 +82,7 @@
                 configForm.candidateStrategy == CandidateStrategy.DEPT_LEADER ||
                 configForm.candidateStrategy == CandidateStrategy.MULTI_LEVEL_DEPT_LEADER
               "
-              label="指定部门"
+              label="指定医院"
               prop="deptIds"
               span="24"
             >
@@ -178,7 +178,7 @@
             </el-form-item>
             <el-form-item
               v-if="configForm.candidateStrategy === CandidateStrategy.FORM_DEPT_LEADER"
-              label="表单内部门字段"
+              label="表单内医院字段"
               prop="formDept"
             >
               <el-select filterable v-model="configForm.formDept" clearable style="width: 100%">
@@ -571,13 +571,13 @@ const emits = defineEmits<{
   'find:returnTaskNodes': [nodeList: SimpleFlowNode[]]
 }>()
 const deptLevelLabel = computed(() => {
-  let label = '部门负责人来源'
+  let label = '医院负责人来源'
   if (configForm.value.candidateStrategy == CandidateStrategy.MULTI_LEVEL_DEPT_LEADER) {
-    label = label + '(指定部门向上)'
+    label = label + '(指定医院向上)'
   } else if (configForm.value.candidateStrategy == CandidateStrategy.FORM_DEPT_LEADER) {
-    label = label + '(表单内部门向上)'
+    label = label + '(表单内医院向上)'
   } else {
-    label = label + '(发起人部门向上)'
+    label = label + '(发起人医院向上)'
   }
   return label
 })
@@ -603,7 +603,7 @@ const userFieldOnFormOptions = computed(() => {
   })
   return formFieldOptions.filter((item) => item.type === 'UserSelect')
 })
-// 表单内部门字段选项, 必须是必填和部门选择器
+// 表单内医院字段选项, 必须是必填和医院选择器
 const deptFieldOnFormOptions = computed(() => {
   return formFieldOptions.filter((item) => item.type === 'DeptSelect')
 })
@@ -618,10 +618,10 @@ const formRules = reactive({
   candidateStrategy: [{ required: true, message: '审批人设置不能为空', trigger: 'change' }],
   userIds: [{ required: true, message: '用户不能为空', trigger: 'change' }],
   roleIds: [{ required: true, message: '角色不能为空', trigger: 'change' }],
-  deptIds: [{ required: true, message: '部门不能为空', trigger: 'change' }],
+  deptIds: [{ required: true, message: '医院不能为空', trigger: 'change' }],
   userGroups: [{ required: true, message: '用户组不能为空', trigger: 'change' }],
   formUser: [{ required: true, message: '表单内用户字段不能为空', trigger: 'change' }],
-  formDept: [{ required: true, message: '表单内部门字段不能为空', trigger: 'change' }],
+  formDept: [{ required: true, message: '表单内医院字段不能为空', trigger: 'change' }],
   postIds: [{ required: true, message: '岗位不能为空', trigger: 'change' }],
   expression: [{ required: true, message: '流程表达式不能为空', trigger: 'blur' }],
   approveMethod: [{ required: true, message: '多人审批方式不能为空', trigger: 'change' }],

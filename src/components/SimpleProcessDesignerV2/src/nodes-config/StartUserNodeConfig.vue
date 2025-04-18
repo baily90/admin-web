@@ -61,7 +61,7 @@
               :content="getDeptNames(startDeptIds)"
             >
               {{ getDeptNames(startDeptIds.slice(0, 2)) }} 等
-              {{ startDeptIds.length }} 个部门可发起流程
+              {{ startDeptIds.length }} 个医院可发起流程
             </el-tooltip>
           </el-text>
         </div>
@@ -144,11 +144,11 @@ const props = defineProps({
 })
 // 可发起流程的用户编号
 const startUserIds = inject<Ref<any[]>>('startUserIds')
-// 可发起流程的部门编号
+// 可发起流程的医院编号
 const startDeptIds = inject<Ref<any[]>>('startDeptIds')
 // 用户列表
 const userOptions = inject<Ref<UserApi.UserVO[]>>('userList')
-// 部门列表
+// 医院列表
 const deptOptions = inject<Ref<DeptApi.DeptVO[]>>('deptList')
 // 抽屉配置
 const { settingVisible, closeDrawer, openDrawer } = useDrawer()

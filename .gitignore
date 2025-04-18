@@ -1,8 +1,8 @@
 node_modules
 .DS_Store
-dist
-dist-ssr
-/dist*
+build
+build-ssr
+/build*
 pnpm-debug
 auto-*.d.ts
 .idea

@@ -60,7 +60,7 @@ const props = defineProps({
     type: Array,
     required: false
   },
-  // 可发起流程的部门编号
+  // 可发起流程的医院编号
   startDeptIds: {
     type: Array,
     required: false
@@ -74,7 +74,7 @@ const formType = ref(20)
 const roleOptions = ref<RoleApi.RoleVO[]>([]) // 角色列表
 const postOptions = ref<PostApi.PostVO[]>([]) // 岗位列表
 const userOptions = ref<UserApi.UserVO[]>([]) // 用户列表
-const deptOptions = ref<DeptApi.DeptVO[]>([]) // 部门列表
+const deptOptions = ref<DeptApi.DeptVO[]>([]) // 医院列表
 const deptTreeOptions = ref()
 const userGroupOptions = ref<UserGroupApi.UserGroupVO[]>([]) // 用户组列表
 
@@ -186,7 +186,7 @@ onMounted(async () => {
     postOptions.value = await PostApi.getSimplePostList()
     // 获得用户列表
     userOptions.value = await UserApi.getSimpleUserList()
-    // 获得部门列表
+    // 获得医院列表
     deptOptions.value = await DeptApi.getSimpleDeptList()
     deptTreeOptions.value = handleTree(deptOptions.value as DeptApi.DeptVO[], 'id')
     // 获取用户组列表

@@ -20,7 +20,7 @@
     </el-form>
     <el-form-item
       v-if="formData.dataScope === SystemDataScopeEnum.DEPT_CUSTOM"
-      label="部门范围"
+      label="医院范围"
       label-width="80px"
     >
       <el-card class="w-full h-400px !overflow-y-scroll" shadow="never">
@@ -85,7 +85,7 @@ const formData = reactive({
   dataScopeDeptIds: []
 })
 const formRef = ref() // 表单 Ref
-const deptOptions = ref<any[]>([]) // 部门树形结构
+const deptOptions = ref<any[]>([]) // 医院树形结构
 const deptExpand = ref(true) // 展开/折叠
 const treeRef = ref() // 菜单树组件 Ref
 const treeNodeAll = ref(false) // 全选/全不选

@@ -406,7 +406,7 @@ export default {
       nickname: '用户昵称',
       mobile: '手机号码',
       email: '用户邮箱',
-      dept: '所属部门',
+      dept: '所属医院',
       posts: '所属岗位',
       roles: '所属角色',
       sex: '性别',

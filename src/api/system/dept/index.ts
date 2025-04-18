@@ -12,32 +12,32 @@ export interface DeptVO {
   createTime: Date
 }
 
-// 查询部门（精简)列表
+// 查询医院（精简)列表
 export const getSimpleDeptList = async (): Promise<DeptVO[]> => {
   return await request.get({ url: '/system/dept/simple-list' })
 }
 
-// 查询部门列表
+// 查询医院列表
 export const getDeptPage = async (params: PageParam) => {
   return await request.get({ url: '/system/dept/list', params })
 }
 
-// 查询部门详情
+// 查询医院详情
 export const getDept = async (id: number) => {
   return await request.get({ url: '/system/dept/get?id=' + id })
 }
 
-// 新增部门
+// 新增医院
 export const createDept = async (data: DeptVO) => {
   return await request.post({ url: '/system/dept/create', data: data })
 }
 
-// 修改部门
+// 修改医院
 export const updateDept = async (params: DeptVO) => {
   return await request.put({ url: '/system/dept/update', data: params })
 }
 
-// 删除部门
+// 删除医院
 export const deleteDept = async (id: number) => {
   return await request.delete({ url: '/system/dept/delete?id=' + id })
 }

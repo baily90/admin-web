@@ -111,7 +111,7 @@
                 placement="top"
                 :content="row.startDepts.map((dept: any) => dept.name).join('、')"
               >
-                {{ row.startDepts[0].name }}等 {{ row.startDepts.length }} 个部门可见
+                {{ row.startDepts[0].name }}等 {{ row.startDepts.length }} 个医院可见
               </el-tooltip>
             </el-text>
             <el-text v-else>

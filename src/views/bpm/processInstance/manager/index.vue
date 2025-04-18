@@ -98,7 +98,7 @@
         fixed="left"
       />
       <el-table-column label="流程发起人" align="center" prop="startUser.nickname" width="120" />
-      <el-table-column label="发起部门" align="center" prop="startUser.deptName" width="120" />
+      <el-table-column label="发起医院" align="center" prop="startUser.deptName" width="120" />
       <el-table-column label="流程状态" prop="status" width="120">
         <template #default="scope">
           <dict-tag :type="DICT_TYPE.BPM_PROCESS_INSTANCE_STATUS" :value="scope.row.status" />

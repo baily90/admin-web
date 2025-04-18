@@ -14,14 +14,14 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="归属部门" prop="deptId">
+          <el-form-item label="归属医院" prop="deptId">
             <el-tree-select
               v-model="formData.deptId"
               :data="deptList"
               :props="defaultProps"
               check-strictly
               node-key="id"
-              placeholder="请选择归属部门"
+              placeholder="请选择归属医院"
             />
           </el-form-item>
         </el-col>
@@ -165,7 +165,7 @@ const open = async (type: string, id?: number) => {
       formLoading.value = false
     }
   }
-  // 加载部门树
+  // 加载医院树
   deptList.value = handleTree(await DeptApi.getSimpleDeptList())
   // 加载岗位列表
   postList.value = await PostApi.getSimplePostList()

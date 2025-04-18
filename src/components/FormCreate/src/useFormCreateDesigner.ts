@@ -18,7 +18,7 @@ import { apiSelectRule } from '@/components/FormCreate/src/config/selectRule'
  * - 多图上传
  * - 字典选择器
  * - 用户选择器
- * - 部门选择器
+ * - 医院选择器
  * - 富文本
  */
 export const useFormCreateDesigner = async (designer: Ref) => {
@@ -55,7 +55,7 @@ export const useFormCreateDesigner = async (designer: Ref) => {
   })
   const deptSelectRule = useSelectRule({
     name: 'DeptSelect',
-    label: '部门选择器',
+    label: '医院选择器',
     icon: 'icon-address-card-o'
   })
   const dictSelectRule = useDictSelectRule()

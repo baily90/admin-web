@@ -36,7 +36,7 @@
         userTaskForm.candidateStrategy == CandidateStrategy.DEPT_LEADER ||
         userTaskForm.candidateStrategy == CandidateStrategy.MULTI_LEVEL_DEPT_LEADER
       "
-      label="指定部门"
+      label="指定医院"
       prop="candidateParam"
       span="24"
     >
@@ -131,7 +131,7 @@
     </el-form-item>
     <el-form-item
       v-if="userTaskForm.candidateStrategy === CandidateStrategy.FORM_DEPT_LEADER"
-      label="表单内部门字段"
+      label="表单内医院字段"
       prop="formDept"
     >
       <el-select
@@ -237,7 +237,7 @@ const bpmnElement = ref()
 const bpmnInstances = () => (window as any)?.bpmnInstances
 
 const roleOptions = ref<RoleApi.RoleVO[]>([]) // 角色列表
-const deptTreeOptions = ref() // 部门树
+const deptTreeOptions = ref() // 医院树
 const postOptions = ref<PostApi.PostVO[]>([]) // 岗位列表
 const userOptions = ref<UserApi.UserVO[]>([]) // 用户列表
 const userGroupOptions = ref<UserGroupApi.UserGroupVO[]>([]) // 用户组列表
@@ -247,20 +247,20 @@ const { formFieldOptions } = useFormFieldsPermission(FieldPermissionType.READ)
 const userFieldOnFormOptions = computed(() => {
   return formFieldOptions.filter((item) => item.type === 'UserSelect')
 })
-// 表单内部门字段选项, 必须是必填和部门选择器
+// 表单内医院字段选项, 必须是必填和医院选择器
 const deptFieldOnFormOptions = computed(() => {
   return formFieldOptions.filter((item) => item.type === 'DeptSelect')
 })
 
 const deptLevel = ref(1)
 const deptLevelLabel = computed(() => {
-  let label = '部门负责人来源'
+  let label = '医院负责人来源'
   if (userTaskForm.value.candidateStrategy == CandidateStrategy.MULTI_LEVEL_DEPT_LEADER) {
-    label = label + '(指定部门向上)'
+    label = label + '(指定医院向上)'
   } else if (userTaskForm.value.candidateStrategy == CandidateStrategy.FORM_DEPT_LEADER) {
-    label = label + '(表单内部门向上)'
+    label = label + '(表单内医院向上)'
   } else {
-    label = label + '(发起人部门向上)'
+    label = label + '(发起人医院向上)'
   }
   return label
 })
@@ -287,7 +287,7 @@ const resetTaskForm = () => {
       // 特殊：流程表达式，只有一个 input 输入框
       userTaskForm.value.candidateParam = [candidateParamStr]
     } else if (userTaskForm.value.candidateStrategy == CandidateStrategy.MULTI_LEVEL_DEPT_LEADER) {
-      // 特殊：多级不部门负责人，需要通过'|'分割
+      // 特殊：多级不医院负责人，需要通过'|'分割
       userTaskForm.value.candidateParam = candidateParamStr
         .split('|')[0]
         .split(',')
@@ -370,14 +370,14 @@ const updateElementTask = () => {
       ? userTaskForm.value.candidateParam.join(',')
       : userTaskForm.value.candidateParam
 
-  // 特殊处理多级部门情况
+  // 特殊处理多级医院情况
   if (
     userTaskForm.value.candidateStrategy == CandidateStrategy.MULTI_LEVEL_DEPT_LEADER ||
     userTaskForm.value.candidateStrategy == CandidateStrategy.FORM_DEPT_LEADER
   ) {
     candidateParam += '|' + deptLevel.value
   }
-  // 特殊处理发起人部门负责人、发起人连续部门负责人
+  // 特殊处理发起人医院负责人、发起人连续医院负责人
   if (
     userTaskForm.value.candidateStrategy == CandidateStrategy.START_USER_DEPT_LEADER ||
     userTaskForm.value.candidateStrategy == CandidateStrategy.START_USER_MULTI_LEVEL_DEPT_LEADER
@@ -452,7 +452,7 @@ watch(
 onMounted(async () => {
   // 获得角色列表
   roleOptions.value = await RoleApi.getSimpleRoleList()
-  // 获得部门列表
+  // 获得医院列表
   const deptOptions = await DeptApi.getSimpleDeptList()
   deptTreeOptions.value = handleTree(deptOptions, 'id')
   // 获得岗位列表

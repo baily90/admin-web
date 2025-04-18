@@ -7,19 +7,19 @@
       :rules="formRules"
       label-width="80px"
     >
-      <el-form-item label="上级部门" prop="parentId">
+      <el-form-item label="上级医院" prop="parentId">
         <el-tree-select
           v-model="formData.parentId"
           :data="deptTree"
           :props="defaultProps"
           check-strictly
           default-expand-all
-          placeholder="请选择上级部门"
+          placeholder="请选择上级医院"
           value-key="deptId"
         />
       </el-form-item>
-      <el-form-item label="部门名称" prop="name">
-        <el-input v-model="formData.name" placeholder="请输入部门名称" />
+      <el-form-item label="医院名称" prop="name">
+        <el-input v-model="formData.name" placeholder="请输入医院名称" />
       </el-form-item>
       <el-form-item label="显示排序" prop="sort">
         <el-input-number v-model="formData.sort" :min="0" controls-position="right" />
@@ -86,8 +86,8 @@ const formData = ref({
   status: CommonStatusEnum.ENABLE
 })
 const formRules = reactive<FormRules>({
-  parentId: [{ required: true, message: '上级部门不能为空', trigger: 'blur' }],
-  name: [{ required: true, message: '部门名称不能为空', trigger: 'blur' }],
+  parentId: [{ required: true, message: '上级医院不能为空', trigger: 'blur' }],
+  name: [{ required: true, message: '医院名称不能为空', trigger: 'blur' }],
   sort: [{ required: true, message: '显示排序不能为空', trigger: 'blur' }],
   email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
   phone: [
@@ -116,7 +116,7 @@ const open = async (type: string, id?: number) => {
   }
   // 获得用户列表
   userList.value = await UserApi.getSimpleUserList()
-  // 获得部门树
+  // 获得医院树
   await getTree()
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗
@@ -163,11 +163,11 @@ const resetForm = () => {
   formRef.value?.resetFields()
 }
 
-/** 获得部门树 */
+/** 获得医院树 */
 const getTree = async () => {
   deptTree.value = []
   const data = await DeptApi.getSimpleDeptList()
-  let dept: Tree = { id: 0, name: '顶级部门', children: [] }
+  let dept: Tree = { id: 0, name: '顶级医院', children: [] }
   dept.children = handleTree(data)
   deptTree.value.push(dept)
 }

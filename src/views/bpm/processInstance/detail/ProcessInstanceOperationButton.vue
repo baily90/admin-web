@@ -978,7 +978,7 @@ const handleReCreate = async () => {
 const getDeleteSignUserLabel = (task: any): string => {
   const deptName = task?.assigneeUser?.deptName || task?.ownerUser?.deptName
   const nickname = task?.assigneeUser?.nickname || task?.ownerUser?.nickname
-  return `${nickname} ( 所属部门：${deptName} )`
+  return `${nickname} ( 所属医院：${deptName} )`
 }
 /** 处理减签 */
 const handlerDeleteSign = async () => {

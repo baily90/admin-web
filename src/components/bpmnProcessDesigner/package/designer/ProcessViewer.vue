@@ -68,7 +68,7 @@
             align="center"
             v-else
           />
-          <el-table-column label="部门" min-width="100" align="center">
+          <el-table-column label="医院" min-width="100" align="center">
             <template #default="scope">
               {{ scope.row.assigneeUser?.deptName || scope.row.ownerUser?.deptName }}
             </template>

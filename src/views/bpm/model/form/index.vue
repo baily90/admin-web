@@ -232,7 +232,7 @@ const initData = async () => {
   categoryList.value = await CategoryApi.getCategorySimpleList()
   // 获取用户列表
   userList.value = await UserApi.getSimpleUserList()
-  // 获取部门列表
+  // 获取医院列表
   deptList.value = await DeptApi.getSimpleDeptList()
 
   // 最终，设置 currentStep 切换到第一步

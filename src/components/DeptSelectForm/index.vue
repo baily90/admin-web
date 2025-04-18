@@ -1,5 +1,5 @@
 <template>
-  <Dialog v-model="dialogVisible" title="部门选择" width="600">
+  <Dialog v-model="dialogVisible" title="医院选择" width="600">
     <el-row v-loading="formLoading">
       <el-col :span="24">
         <ContentWrap class="h-1/1">
@@ -58,8 +58,8 @@ const props = defineProps({
 })
 
 const treeRef = ref()
-const deptTree = ref<Tree[]>([]) // 部门树形结构
-const selectedDeptIds = ref<number[]>([]) // 选中的部门 ID 列表
+const deptTree = ref<Tree[]>([]) // 医院树形结构
+const selectedDeptIds = ref<number[]>([]) // 选中的医院 ID 列表
 const dialogVisible = ref(false) // 弹窗的是否展示
 const formLoading = ref(false) // 表单的加载中
 
@@ -68,14 +68,14 @@ const open = async (selectedList?: DeptApi.DeptVO[]) => {
   resetForm()
   formLoading.value = true
   try {
-    // 加载部门列表
+    // 加载医院列表
     const deptData = await DeptApi.getSimpleDeptList()
     deptTree.value = handleTree(deptData)
   } finally {
     formLoading.value = false
   }
   dialogVisible.value = true
-  // 设置已选择的部门
+  // 设置已选择的医院
   if (selectedList?.length) {
     await nextTick()
     const selectedIds = selectedList
@@ -100,7 +100,7 @@ const handleCheck = (data: any, checked: any) => {
 /** 提交选择 */
 const submitForm = async () => {
   try {
-    // 获取选中的完整部门数据
+    // 获取选中的完整医院数据
     const checkedNodes = treeRef.value.getCheckedNodes()
     message.success(t('common.updateSuccess'))
     dialogVisible.value = false
